@@ -247,5 +247,6 @@ fn parse_date(input: &String) -> Option<NaiveDate> {
     //     return Some(date_only);
     // }
 
-    None
+    // None
+    return Local::today().naive_local()
 }
