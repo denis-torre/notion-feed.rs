@@ -79,13 +79,6 @@ impl<'a> Feed<'a> {
         )
         .await;
 
-            // Printing titles of each RSS feed item
-    for item in &all_items {
-        if let Some(title) = &item.title {
-            println!("Title: {}", title);
-        }
-    }
-
         Ok(())
     }
 
