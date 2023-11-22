@@ -79,6 +79,13 @@ impl<'a> Feed<'a> {
         )
         .await;
 
+            // Printing titles of each RSS feed item
+    for item in &all_items {
+        if let Some(title) = &item.title {
+            println!("Title: {}", title);
+        }
+    }
+
         Ok(())
     }
 
@@ -230,23 +237,22 @@ impl<'a> Feed<'a> {
 }
 
 fn parse_date(input: &String) -> Option<NaiveDate> {
-    // let rfc2822 = DateTime::parse_from_rfc2822(&input);
+    let rfc2822 = DateTime::parse_from_rfc2822(&input);
 
-    // if let Ok(rfc2822) = rfc2822 {
-    //     return Some(rfc2822.date_naive());
-    // }
+    if let Ok(rfc2822) = rfc2822 {
+        return Some(rfc2822.date_naive());
+    }
 
-    // let rfc3339 = DateTime::parse_from_rfc3339(&input);
+    let rfc3339 = DateTime::parse_from_rfc3339(&input);
 
-    // if let Ok(rfc3339) = rfc3339 {
-    //     return Some(rfc3339.date_naive());
-    // }
+    if let Ok(rfc3339) = rfc3339 {
+        return Some(rfc3339.date_naive());
+    }
 
-    // let date_only = NaiveDate::parse_from_str(&input, "%Y-%m-%d");
-    // if let Ok(date_only) = date_only {
-    //     return Some(date_only);
-    // }
+    let date_only = NaiveDate::parse_from_str(&input, "%Y-%m-%d");
+    if let Ok(date_only) = date_only {
+        return Some(date_only);
+    }
 
-    // None
-    return Local::today().naive_local()
+    None
 }
